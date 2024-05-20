@@ -7,14 +7,14 @@ use App\Models\ProductColor;
 use App\Models\ProductImage;
 use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'name',
@@ -22,8 +22,6 @@ class Product extends Model
         'price',
         'stock',
         'product_category_id',
-        'product_size_id',
-        'product_color_id',
     ];
 
     /**
@@ -33,28 +31,9 @@ class Product extends Model
      */
     public function productCategory(): BelongsTo
     {
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsTo(ProductCategory::class, 'product_category_id');
     }
 
-    /**
-     * Get the productColor that owns the Product
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function productColor(): BelongsTo
-    {
-        return $this->belongsTo(ProductColor::class);
-    }
-
-    /**
-     * Get the productSize that owns the Product
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function productSize(): BelongsTo
-    {
-        return $this->belongsTo(ProductSize::class);
-    }
 
     /**
      * Get all of the productImages for the Product
@@ -63,6 +42,18 @@ class Product extends Model
      */
     public function productImages(): HasMany
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->hasMany(ProductImage::class, 'product_id');
+    }
+
+    protected $casts = [
+        'size' => 'json',
+        'color' => 'json',
+        'release_date' => 'date',
+        'is_available' => 'boolean',
+    ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }

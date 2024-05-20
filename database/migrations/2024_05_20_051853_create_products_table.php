@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_category_id')->constrained('product_categories');
-            $table->foreignId('product_color_id')->constrained('product_colors');
-            $table->foreignId('product_size_id')->constrained('product_sizes');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('description');
+            $table->json('size');
+            $table->json('color');
+            $table->integer('price');
             $table->date('release_date');
             $table->boolean('is_available')->default(true);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

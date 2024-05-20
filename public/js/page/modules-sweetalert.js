@@ -1,5 +1,28 @@
 "use strict";
 
+$(".swal-confirm-delete").on('click', function (event) {
+  event.preventDefault();
+
+  // mencari elemen form terdekat dari .swal-confirm-delete
+  let form = $(this).closest("form");
+
+  // Mengambil properti data-name yg dikirim oleh button
+  let name = $(this).data("name");
+
+  swal({
+    title: 'Confirmation!',
+    text: `Are you sure you want to delete ${name}`,
+    icon: 'warning',
+    buttons: true,
+    dangerMode: true,
+  })
+    .then((willDelete) => {
+      if (willDelete) {
+        form.submit();
+      }
+    });
+});
+
 $("#swal-1").on('click', function () {
   swal('Hello');
 });

@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
-        <div class="sidebar-brand mb-3">
-            <a href="index.html"><img src="{{ asset('img/TripTix.png') }}" alt="logo" width="80"></a>
+        <div class="sidebar-brand">
+            <a href="index.html">NikeApp</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">Na</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -18,6 +18,11 @@
                 <a class="nav-link" href="{{ route('users.index') }}">
                     <i class="fa-solid fa-user"></i>
                     <span>User</span></a>
+            </li>
+            <li class="nav-item {{ $type_menu == 'category' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('productCategory.index') }}">
+                    <i class="fa-solid fa-list"></i>
+                    <span>Category</span></a>
             </li>
         </ul>
     </aside>
