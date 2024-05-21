@@ -11,12 +11,19 @@ use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         $productCategories = ProductCategory::orderBy('name')->get();
         $products = Product::with(['productCategory'])->paginate(20);
 
+        if($request->has('product_search')) {
+            $products = Product::with(['productCategory'])
+                        ->where('name', 'like', '%' . $request->product_search . '%')
+                        ->orWhere('description', 'like', '%' . $request->product_search . '%')
+                        ->paginate(20);
+        }
+
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'Products retrieved successfully',
             'data' => ProductResource::collection($products),
         ]);
@@ -32,7 +39,7 @@ class ProductController extends Controller
         if($request->hasFile('image'))  {
             foreach ($images as $image) {
                 $filename = uniqid() . '_' . $image->getClientOriginalName();
-                $uploadedImages[] = ['image_url' => 'http://laravel11-nikeapp.test/storage/products/' . $filename];
+                $uploadedImages[] = ['image_url' => 'https://nikeapp.levistudio.my.id//storage/products/' . $filename];
                 $image->storeAs('public/products', $filename);
             }
         }
@@ -43,7 +50,7 @@ class ProductController extends Controller
         $newProduct = Product::create($validated);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'Product created successfully',
             'data' => new ProductResource($newProduct),
         ]);

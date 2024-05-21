@@ -61,7 +61,7 @@
                                                 <a href="{{ route('products.show', $product->slug) }}"
                                                     class="text-decoration-none text-reset">
                                                     <div class="card border rounded rounded-4">
-                                                        <img src="{{ $product->image[0]['image_url'] ?? 'http://laravel11-nikeapp.test/storage/products/aj-1.jpg' }}"
+                                                        <img src="{{ $product->image[0]['image_url'] ?? 'https://nikeapp.levistudio.my.id//storage/products/aj-1.jpg' }}"
                                                             class="card-img-top p-2 img-rounded" height="150"
                                                             style="object-fit: cover;" alt="Hollywood Sign on The Hill" />
                                                         <div class="card-body p-2">
