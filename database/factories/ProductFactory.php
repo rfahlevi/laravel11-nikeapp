@@ -40,10 +40,10 @@ class ProductFactory extends Factory
             ]),
             'image' => json_encode([
                 [
-                    'image_url' => 'https://nikeapp.levistudio.my.id//storage/products/aj-2.png',
+                    'image_url' => 'https://nikeapp.levistudio.my.id/storage/products/aj-2.png',
                 ],
                 [
-                    'image_url' => 'https://nikeapp.levistudio.my.id//storage/products/aj-2.png',
+                    'image_url' => 'https://nikeapp.levistudio.my.id/storage/products/aj-2.png',
                 ],
             ]),
             'price' => fake()->numberBetween(1000000, 3000000),
