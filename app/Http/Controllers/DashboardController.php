@@ -11,20 +11,23 @@ class DashboardController extends Controller
 {
     public function index(Request $request) {
         $productCategories = ProductCategory::orderBy('name')->get();
-        $products = Product::with(['productCategory', 'productImages'])->paginate(20);
+        $products = Product::with(['productCategory'])->paginate(20);
+
+        foreach ($products as $product) {
+            $product->image = json_decode($product->image, true);
+        }
 
         $productCategoryQuery = $request->query('product_category');
         
         if($request->has('product_search')) {
-            $products = Product::with(['productCategory', 'productImages'])
+            $products = Product::with(['productCategory'])
                         ->where('name', 'like', '%' . $request->product_search . '%')
                         ->orWhere('description', 'like', '%' . $request->product_search . '%')
                         ->paginate(20);
         }
 
         if($productCategoryQuery) {
-            dd('adckvandvad');
-            $products = Product::with(['productCategory', 'productImages'])
+            $products = Product::with(['productCategory'])
                         ->where('product_category_id', $productCategoryQuery)
                         ->paginate(20);
         }

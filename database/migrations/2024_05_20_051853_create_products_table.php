@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->json('size');
             $table->json('color');
+            $table->json('image');
             $table->integer('price');
             $table->date('release_date');
             $table->boolean('is_available')->default(true);

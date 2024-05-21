@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\ProductSeeder;
-use Database\Seeders\ProductImageSeeder;
 use Database\Seeders\ProductCategorySeeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,7 +20,6 @@ class DatabaseSeeder extends Seeder
         UserSeeder::class,
         ProductCategorySeeder::class,
         ProductSeeder::class,
-        ProductImageSeeder::class,
     ]);
     }
 }

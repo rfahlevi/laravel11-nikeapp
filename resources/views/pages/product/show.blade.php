@@ -24,7 +24,7 @@
                                     <div class="col-12 col-md-6">
                                         <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
                                             <ol class="carousel-indicators">
-                                                @foreach ($product->productImages as $images)
+                                                @foreach ($images as $image)
                                                     <li data-target="#carouselExampleIndicators3"
                                                         data-slide-to="{{ $loop->index }}"
                                                         class="{{ $loop->first ? 'active' : '' }}">
@@ -32,10 +32,10 @@
                                                 @endforeach
                                             </ol>
                                             <div class="carousel-inner">
-                                                @foreach ($product->productImages as $images)
+                                                @foreach ($images as $image)
                                                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                                         <img class="d-block w-100 rounded rounded-4"
-                                                            src="{{ $images->image_url }}" alt="{{ $images->image_url }}">
+                                                            src="{{ $image['image_url'] }}" alt="{{ $image['image_url'] }}">
                                                     </div>
                                                 @endforeach
                                             </div>

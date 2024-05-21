@@ -18,10 +18,15 @@ class Product extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'price',
         'stock',
+        'size',
+        'color',
+        'image',
         'product_category_id',
+        'release_date'
     ];
 
     /**
@@ -34,20 +39,10 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class, 'product_category_id');
     }
 
-
-    /**
-     * Get all of the productImages for the Product
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function productImages(): HasMany
-    {
-        return $this->hasMany(ProductImage::class, 'product_id');
-    }
-
     protected $casts = [
         'size' => 'json',
         'color' => 'json',
+        'image' => 'json',
         'release_date' => 'date',
         'is_available' => 'boolean',
     ];

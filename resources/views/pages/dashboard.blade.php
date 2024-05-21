@@ -60,10 +60,10 @@
                                             <div class="col mb-3 ">
                                                 <a href="{{ route('products.show', $product->slug) }}"
                                                     class="text-decoration-none text-reset">
-                                                    <div class="card border rounded rounded-4 h-100">
-                                                        <img src="{{ $product->productImages[0]->image_url ?? 'http://laravel11-nikeapp.test/storage/products/aj-1.jpg' }}"
-                                                            class="card-img-top" height="200" style="object-fit: cover;"
-                                                            alt="Hollywood Sign on The Hill" />
+                                                    <div class="card border rounded rounded-4">
+                                                        <img src="{{ $product->image[0]['image_url'] ?? 'http://laravel11-nikeapp.test/storage/products/aj-1.jpg' }}"
+                                                            class="card-img-top p-2 img-rounded" height="150"
+                                                            style="object-fit: cover;" alt="Hollywood Sign on The Hill" />
                                                         <div class="card-body p-2">
                                                             <h5 class="card-title text-dark"
                                                                 style=" display: -webkit-box;-webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">

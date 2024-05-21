@@ -38,6 +38,14 @@ class ProductFactory extends Factory
                     'name' => 'White',
                 ],
             ]),
+            'image' => json_encode([
+                [
+                    'image_url' => 'http://laravel11-nikeapp.test/storage/products/aj-2.png',
+                ],
+                [
+                    'image_url' => 'http://laravel11-nikeapp.test/storage/products/aj-2.png',
+                ],
+            ]),
             'price' => fake()->numberBetween(1000000, 3000000),
             'release_date' => fake()->date(),
             'is_available' => fake()->boolean(),
