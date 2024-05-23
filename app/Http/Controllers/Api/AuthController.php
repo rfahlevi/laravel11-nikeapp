@@ -37,4 +37,12 @@ class AuthController extends Controller
             'message' => 'Berhasil logout',
         ], 200);
     }
+
+    public function getUser(Request $request) {
+         return response()->json([
+            'status' => true,
+            'message' => 'Success',
+            'data' => new UserResource($request->user()),
+        ], 200);
+    }
 }

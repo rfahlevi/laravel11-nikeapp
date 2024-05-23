@@ -14,18 +14,18 @@
                     <h6 class="text-dark mb-0">Product Categories</h6>
                     <div class="nike-divider my-3"></div>
                     <div class="selectgroup selectgroup-pills">
-                        @foreach ($productCategories as $productCategory)
-                            <a href="{{ route('home', ['product-category' => $productCategory->id]) }}"
-                                class="text-decoration-none text-reset">
+                        <form id="product_category" action="{{ route('home') }}" method="GET">
+                            @foreach ($productCategories as $productCategory)
                                 <label class="selectgroup-item">
-                                    <input type="radio" name="product-category" value="{{ $productCategory->id }}"
+                                    <input type="radio" name="product_category" value="{{ $productCategory->id }}"
                                         class="selectgroup-input"
-                                        {{ $productCategory->name == 'All Products' ? 'checked' : '' }}>
+                                        {{ request('product_category') == $productCategory->id ? 'checked' : '' }}
+                                        onclick="submitCategoryForm();">
                                     <span
                                         class="selectgroup-button selectgroup-button-icon">{{ $productCategory->name }}</span>
                                 </label>
-                            </a>
-                        @endforeach
+                            @endforeach
+                        </form>
                     </div>
                 </div>
             </div>
@@ -55,33 +55,43 @@
                                         </div>
                                     </div>
                                     <div class="nike-divider my-3"></div>
-                                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                                        @foreach ($products as $product)
-                                            <div class="col mb-3 ">
-                                                <a href="{{ route('products.show', $product->slug) }}"
-                                                    class="text-decoration-none text-reset">
-                                                    <div class="card border rounded rounded-4">
-                                                        <img src="{{ $product->image[0]['image_url'] ?? 'https://nikeapp.levistudio.my.id/storage/products/aj-1.jpg' }}"
-                                                            class="card-img-top p-2 img-rounded" height="150"
-                                                            style="object-fit: cover;" alt="Hollywood Sign on The Hill" />
-                                                        <div class="card-body p-2">
-                                                            <h5 class="card-title text-dark"
-                                                                style=" display: -webkit-box;-webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
-                                                                {{ $product->name }}</h5>
-                                                            <h6 class="text-dark font-weight-medium">
-                                                                {{ $product->productCategory->name }}</h6>
-                                                            <p class="card-text"
-                                                                style=" display: -webkit-box;-webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
-                                                                {{ $product->description }}</p>
-                                                            <p class="text-danger font-weight-semibold">
-                                                                {{ $product->price }}
-                                                            </p>
+                                    @if (count($products) > 0)
+                                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                                            @foreach ($products as $product)
+                                                <div class="col mb-3 ">
+                                                    <a href="{{ route('products.show', $product->slug) }}"
+                                                        class="text-decoration-none text-reset">
+                                                        <div class="card border rounded rounded-4">
+                                                            <img src="{{ $product->image[0]['image_url'] ?? 'http://laravel11-nikeapp.test/storage/products/aj-1.jpg' }}"
+                                                                class="card-img-top p-2 img-rounded" height="150"
+                                                                style="object-fit: cover;"
+                                                                alt="Hollywood Sign on The Hill" />
+                                                            <div class="card-body p-2">
+                                                                <h5 class="card-title text-dark"
+                                                                    style=" display: -webkit-box;-webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                                                    {{ $product->name }}</h5>
+                                                                <h6 class="text-dark font-weight-medium">
+                                                                    {{ $product->productCategory->name }}</h6>
+                                                                <p class="card-text"
+                                                                    style=" display: -webkit-box;-webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                                                    {{ $product->description }}</p>
+                                                                <p class="text-danger font-weight-semibold">
+                                                                    {{ $product->price }}
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    </div>
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div class="d-flex flex-column justify-content-center align-items-center w-100">
+                                            <img src="{{ asset('img/img_empty.png') }}" alt="empty" width="100"
+                                                height="100" class="mb-3">
+                                            <h6 class="text-dark font-weight-normal">Oopss, No products found...</h6>
+                                        </div>
+                                    @endif
+
                                     <div class="card-footer text-right float-right">
                                         {{ $products->withQueryString()->links() }}
                                     </div>
@@ -102,5 +112,9 @@
                 $('.selectgroup-input').not(this).prop('checked', false);
             })
         });
+
+        function submitCategoryForm() {
+            document.getElementById('product_category').submit();
+        }
     </script>
 @endpush

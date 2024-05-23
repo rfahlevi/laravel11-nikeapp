@@ -18,8 +18,6 @@ class DashboardController extends Controller
         foreach ($products as $product) {
             $product->image = json_decode($product->image, true);
         }
-
-        $productCategoryQuery = $request->query('product_category');
         
         if($request->has('product_search')) {
             $products = Product::with(['productCategory'])
@@ -29,10 +27,18 @@ class DashboardController extends Controller
                         ->paginate(20);
         }
 
-        if($productCategoryQuery) {
-            $products = Product::with(['productCategory'])
-                        ->where('product_category_id', $productCategoryQuery)
+        if($request->has('product_category')) {
+            $category = ProductCategory::find($request->product_category);
+            if($category->name == 'All Products') {
+                $products = Product::with(['productCategory'])
+                        ->orderBy('created_at', 'desc')
                         ->paginate(20);
+            } else {
+                $products = Product::with(['productCategory'])
+                        ->where('product_category_id', $request->product_category)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(20);
+            }
         }
 
         foreach ($products as $product) {
