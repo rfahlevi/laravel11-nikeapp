@@ -32,7 +32,7 @@
                                         {{-- Search Category --}}
                                         <div class="input-group d-flex align-items-center">
                                             <input type="text" name="category_search" class="form-control"
-                                                placeholder="Cari Category" value="{{ Request::get('category_search') }}">
+                                                placeholder="Search Category" value="{{ Request::get('category_search') }}">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-icon btn-primary">
                                                     <i class="fas fa-magnifying-glass"></i>

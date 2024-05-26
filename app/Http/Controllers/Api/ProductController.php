@@ -42,7 +42,7 @@ class ProductController extends Controller
         if($request->hasFile('image'))  {
             foreach ($images as $image) {
                 $filename = uniqid() . '_' . $image->getClientOriginalName();
-                $uploadedImages[] = ['image_url' => 'https://nikeapp.levistudio.my.id/storage/products/' . $filename];
+                $uploadedImages[] = ['image_url' => 'https://laravel11-nikeapp.test/storage/products/' . $filename];
                 $image->storeAs('public/products', $filename);
             }
         }
