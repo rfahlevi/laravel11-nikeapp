@@ -17,7 +17,7 @@ class ProductCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->randomElement(['All Products', 'Running', 'Basketball', 'Football', 'T-Shrit', 'Hoodies']),
+            'name' => fake()->unique()->randomElement(['Running', 'Basketball', 'Football', 'T-Shrit', 'Hoodies']),
             'slug' => fake()->unique()->slug(),
         ];
     }

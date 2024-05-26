@@ -6,12 +6,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
 
-Route::get('/', function () {
-    return view('pages.auth.login');
-});
-
-
 Route::middleware('auth')->group(function() {
+    Route::get('/', function () {
+        return redirect('home');
+    });
     Route::get('home', [DashboardController::class, 'index'])
             ->name('home');
 

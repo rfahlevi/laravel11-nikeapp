@@ -29,7 +29,7 @@ class DashboardController extends Controller
 
         if($request->has('product_category')) {
             $category = ProductCategory::find($request->product_category);
-            if($category->name == 'All Products') {
+            if($request->product_category == 0) {
                 $products = Product::with(['productCategory'])
                         ->orderBy('created_at', 'desc')
                         ->paginate(20);

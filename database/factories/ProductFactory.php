@@ -17,7 +17,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_category_id' => fake()->numberBetween(2,6),
+            'product_category_id' => fake()->numberBetween(1,5),
             'name' => fake()->name(),
             'slug' => fake()->slug(),
             'description' => fake()->sentence(100),
@@ -40,10 +40,10 @@ class ProductFactory extends Factory
             ]),
             'image' => json_encode([
                 [
-                    'image_url' => 'http://laravel11-nikeapp.test/storage/products/aj-2.png',
+                    'image_url' => 'https://nikeapp.levistudio.my.id/storage/products/aj-1.jpg',
                 ],
                 [
-                    'image_url' => 'http://laravel11-nikeapp.test/storage/products/aj-2.png',
+                    'image_url' => 'https://nikeapp.levistudio.my.id/storage/products/aj-1.jpg',
                 ],
             ]),
             'price' => fake()->numberBetween(1000000, 3000000),

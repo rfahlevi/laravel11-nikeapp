@@ -15,6 +15,11 @@
                     <div class="nike-divider my-3"></div>
                     <div class="selectgroup selectgroup-pills">
                         <form id="product_category" action="{{ route('home') }}" method="GET">
+                            <label class="selectgroup-item">
+                                <input type="radio" name="product_category" value="0" class="selectgroup-input"
+                                    {{ request('product_category') == 0 ? 'checked' : '' }} onclick="submitCategoryForm();">
+                                <span class="selectgroup-button selectgroup-button-icon">All Products</span>
+                            </label>
                             @foreach ($productCategories as $productCategory)
                                 <label class="selectgroup-item">
                                     <input type="radio" name="product_category" value="{{ $productCategory->id }}"
